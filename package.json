@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=prod node ./bin/www",
+    "start": "NODE_ENV=prod USE_REDIS=true node ./bin/www",
     "lint": "./node_modules/.bin/eslint --fix",
     "test": "cross-env NODE_ENV=prod ./node_modules/.bin/jest --testTimeout=10000"
   },

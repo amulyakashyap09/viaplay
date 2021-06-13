@@ -5,9 +5,12 @@ const utils = require('../helpers/functions');
 const { logger } = require('../helpers/logger');
 const redis = require('../db/redis/redis');
 
+const useRedis = process.env.USE_REDIS === 'true';
+
 const TMDB_KEY = config.tmdbApiKey;
 
 const getMovieFromRedis = async (movieName) => {
+  if (!useRedis) return {};
   const data = await redis.getFromCache(movieName);
   return data;
 };
@@ -29,7 +32,10 @@ const getTrailerFromImdb = async (movie) => {
   }
   const trailer = tmdbMovieTrailers.results[0].key;
   const youtubeTrailer = config.youtubeUri + trailer;
-  redis.setInCache(movie.movieName, { trailer: youtubeTrailer, ...movieImdbDetails });
+  // eslint-disable-next-line max-len
+  if (useRedis) {
+    redis.setInCache(movie.movieName, { trailer: youtubeTrailer, ...movieImdbDetails });
+  }
   logger.info({ uri: movie.movieUrl, message: youtubeTrailer, statusCode: 200 });
   return { data: youtubeTrailer, error: {} };
 };

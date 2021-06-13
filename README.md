@@ -5,24 +5,64 @@
 movie resource link (e.g. https://content.viaplay.se/pc-se/film/arrival-2016) as input and based on
 that return the URL to the trailer for that movie.
 
+## Prerequisites
+
+- NodeJs (minimum 8.x)
+- Redis (minimum 5.x)
+
 ## Server
 
-### Prod
-    -   npm start
+API Details
+```
+host = localhost
+port = 3000
+path = /movies/trailer
+query param = movieUrl
+```
 
-### Example
+Git
+```
+git clone https://github.com/amulyakashyap09/viaplay.git
+
+cd viaplay
+```
+
+Command
+- With **REDIS SUPPORT** (Optimised && Recommended)
+```
+NODE_ENV=prod USE_REDIS=true node ./bin/www
+```
+
+- Without **REDIS** (if redis is not installed)
+```
+NODE_ENV=prod USE_REDIS=false node ./bin/www
+```
+
+## Example
 
 ```
 curl --location --request GET 'http://localhost:3000/movies/trailer?movieUrl=https://content.viaplay.se/pc-se/film/arrival-2016'
 ```
-### Request
+
+## Response
 ```
 {
     "trailer": "https://www.youtube.com/watch?v=gwqSi_ToNPs"
 }
 ```
 
-### Keypoints
+
+## Why to use Redis
+
+|| With Redis               | Without Redis |
+| --- | --- | --- |
+|First Requst      | 1200 ms | 1200 ms       |
+|Repeating Request | 10 ms   | 1200 ms       |
+```
+As we can see, after using redis we can optimise the performance of API tremendouly
+```
+
+## Keypoints
 
 - Expressjs a minimal Framework used for simple and fast response
 - Redis is used for the optimisation purpose, to avoid every time making hit to tmdb server
@@ -31,7 +71,7 @@ curl --location --request GET 'http://localhost:3000/movies/trailer?movieUrl=htt
 - For Request Payload Validation we have used Joi library
 - Eslint has been used for the code lint
 
-### For Future improvements
+## For Future improvements
 - Authenticaltion && Authorisation in the applications 
 - Swagger documentation
 
