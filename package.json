@@ -1,0 +1,37 @@
+{
+  "name": "viaplay",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=prod node ./bin/www",
+    "lint": "./node_modules/.bin/eslint --fix",
+    "test": "cross-env NODE_ENV=prod ./node_modules/.bin/jest --testTimeout=10000"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "verbose": true
+  },
+  "dependencies": {
+    "config": "^3.3.6",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "ioredis": "^4.27.6",
+    "joi": "^17.4.0",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "jest": "^27.0.4",
+    "supertest": "^6.1.3"
+  }
+}
