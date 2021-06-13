@@ -1,6 +1,6 @@
 const Joi = require('joi');
-const errors = require('../helpers/error');
-const { logger } = require('../helpers/logger');
+const errors = require('./error');
+const { logger } = require('./logger');
 
 module.exports = {
   getTrailer: (req, res, next) => {

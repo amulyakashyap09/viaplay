@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const validator = require('../validation_service/movieValidator');
+const validator = require('../helpers/validation');
 const controller = require('../controllers/movie');
 
 /* GET users listing. */
